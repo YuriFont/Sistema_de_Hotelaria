@@ -2,6 +2,11 @@ public class Armazem {
     private String produtos;
     private int quantidade;
 
+    public Armazem()
+    {
+        
+    }
+
     public int getQuantidade()
     {
         return this.quantidade;
