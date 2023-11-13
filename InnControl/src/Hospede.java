@@ -1,3 +1,4 @@
-public class Hospede {
+public class Hospede 
+{
     
 }
