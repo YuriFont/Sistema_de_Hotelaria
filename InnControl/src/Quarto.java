@@ -1,7 +1,12 @@
-public class Quarto {
-    
+public class Quarto
+{
     private int id;
     private String situacao;
+
+    public Quarto()
+    {
+
+    }
 
     public int getId()
     {
