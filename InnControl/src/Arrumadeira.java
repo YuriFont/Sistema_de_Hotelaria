@@ -1,3 +1,4 @@
-public class Arrumadeira {
+public class Arrumadeira extends Funcionario 
+{
     
 }
