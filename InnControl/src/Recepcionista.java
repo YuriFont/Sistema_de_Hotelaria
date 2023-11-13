@@ -1,4 +1,5 @@
-public class Recepcionista extends Funcionario {
+public class Recepcionista extends Funcionario 
+{
 
     
 }
