@@ -21,6 +21,6 @@ public class Main
         conta1.setValor(arrumadeira.registrarConsumo());
         arrumadeira.fecharScanner();
 
-        hospede1.pagarConta(conta1, hospede1);
+        hospede2.pagarConta(conta2, hospede2);
     }
 }
