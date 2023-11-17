@@ -13,5 +13,14 @@ public class Main
         hospede1.realizarReserva();
         Hospede hospede2 = new Hospede("Maria", 2, "987654321");
         hospede2.realizarReserva();
+
+        Conta conta1 = new Conta(1, "Joao", hospede1);
+        Conta conta2 = new Conta(2, "Maria", hospede2);
+
+        Arrumadeira arrumadeira = new Arrumadeira();
+        conta1.setValor(arrumadeira.registrarConsumo());
+        arrumadeira.fecharScanner();
+
+        hospede1.pagarConta(conta1, hospede1);
     }
 }

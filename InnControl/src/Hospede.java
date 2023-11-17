@@ -51,4 +51,10 @@ public class Hospede
         Recepcionista recepcionista = new Recepcionista();
         recepcionista.fazerCheckIn(this.nome, this.id, this.telefone);
     }
+
+    public void pagarConta(Conta conta, Hospede hospede)
+    {
+        Recepcionista recepcionista = new Recepcionista();
+        recepcionista.fazerCheckOut(conta, hospede);
+    }
 }
