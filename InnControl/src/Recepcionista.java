@@ -22,13 +22,15 @@ public class Recepcionista extends Funcionario
 
             return true;
 
-        } catch (IOException e) {
+        } catch (IOException e) 
+        {
             System.err.println("Erro ao escrever no arquivo: " + e.getMessage());
             return false;
         }
     }
     
-    public void fazerCheckOut(Conta conta, Hospede hospede) {
+    public void fazerCheckOut(Conta conta, Hospede hospede) 
+    {
         String nome = hospede.getNome();
         String filePath = "InnControl/registros/registros_reserva.txt";
 
@@ -36,26 +38,26 @@ public class Recepcionista extends Funcionario
             File inputFile = new File(filePath);
             File tempFile = new File("InnControl/registros/temp.txt");
 
-            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+            BufferedReader ler = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter escrever = new BufferedWriter(new FileWriter(tempFile));
 
-            String currentLine;
-            boolean found = false;
+            String linhaAtual;
+            boolean achou = false;
 
-            // Read each line from the original file and write to the temporary file
-            while ((currentLine = reader.readLine()) != null) {
-                if (currentLine.contains(nome)) {
-                    currentLine += " - Checkout";
-                    found = true;
+            
+            while ((linhaAtual = ler.readLine()) != null) {
+                if (linhaAtual.contains(nome)) {
+                    linhaAtual += " - Checkout";
+                    achou = true;
                 }
-                writer.write(currentLine + System.lineSeparator());
+                escrever.write(linhaAtual + System.lineSeparator());
             }
 
-            writer.close();
-            reader.close();
+            escrever.close();
+            ler.close();
 
-            // Replace the original file with the temporary file
-            if (found) {
+            // Se o hóspede foi encontrado, exclui o arquivo original e renomeia o arquivo temporário
+            if (achou) {
                 if (inputFile.delete()) {
                     if (!tempFile.renameTo(inputFile)) {
                         System.err.println("Erro ao renomear o arquivo temporário para o original.");
