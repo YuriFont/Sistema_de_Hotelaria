@@ -30,4 +30,10 @@ public class Main
         
         hospede2.pagarConta(conta2, hospede2);*/
     }
+
+    public void addHospede(List<Hospede> list, String nome, int id, String telefone)
+    {
+        list.add(new Hospede(nome, telefone));
+    }
+
 }
