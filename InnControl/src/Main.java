@@ -14,7 +14,7 @@ public class Main
     {
         List<Hospede> list = new ArrayList<>();
 
-        addHospede(list, "Yuri", 18, "6438746");
+        addHospede(list, "Yuri", "6438746");
 
         System.out.println(list.get(0));
 

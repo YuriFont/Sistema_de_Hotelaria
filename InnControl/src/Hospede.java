@@ -10,10 +10,9 @@ public class Hospede
 
     }
 
-    public Hospede(String nome, int id, String telefone) 
+    public Hospede(String nome, String telefone) 
     {
         this.nome = nome;
-        this.id = id;
         this.telefone = telefone;
         this.realizarReserva();
     }
