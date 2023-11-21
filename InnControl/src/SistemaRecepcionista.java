@@ -158,16 +158,6 @@ public class SistemaRecepcionista extends JFrame {
         }
     }
 
-    private void criarConta(int id, double valor)
-    {
-        try (FileWriter writer = new FileWriter("InnControl/registros/contas.txt", true)) {
-            writer.write(id + ", " + valor + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erro ao salvar no arquivo.");
-        }
-    }
-
     private void adicionarRegistro() 
     {
         String nome = textFieldNome.getText();
@@ -177,9 +167,10 @@ public class SistemaRecepcionista extends JFrame {
         int id = registros.isEmpty() ? 1 : registros.get(registros.size() - 1).getId() + 1; 
         Hospede novoRegistro = new Hospede(id, nome, telefone, email);
         registros.add(novoRegistro);
+        contas.add(new Conta(id, 0));
 
         salvarRegistros();
-        criarConta(id, 0);
+        salvarConta();
         JOptionPane.showMessageDialog(this, "Registro adicionado com sucesso.");
         limpartextField();
     }
@@ -198,6 +189,7 @@ public class SistemaRecepcionista extends JFrame {
                 registro.setEmail(textFieldEmail.getText());
                 salvarRegistros();
                 JOptionPane.showMessageDialog(this, "Registro atualizado com sucesso.");
+                limpartextField();
                 return;
             }
         }
@@ -211,10 +203,9 @@ public class SistemaRecepcionista extends JFrame {
         String idStr = textFieldId.getText();
         int id = Integer.parseInt(idStr);
 
-        for (Hospede registro : registros) 
+        for (Hospede registro : registros)
         {
             if (registro.getId() == id) {
-                
                 registros.remove(registro);
                 removeConta(id);
                 salvarRegistros();
