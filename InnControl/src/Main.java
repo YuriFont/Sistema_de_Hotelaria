@@ -14,6 +14,8 @@ public class Main
     {
         List<Hospede> list = new ArrayList<>();
 
+
+
         /*Conta conta1 = new Conta(1, "Joao", hospede1);
         Conta conta2 = new Conta(2, "Maria", hospede2);
 
@@ -23,4 +25,10 @@ public class Main
 
         hospede2.pagarConta(conta2, hospede2);*/
     }
+
+    public void addHospede(List<Hospede> list, String nome, int id, String telefone)
+    {
+        list.add(new Hospede(nome, id, telefone));
+    }
+
 }
