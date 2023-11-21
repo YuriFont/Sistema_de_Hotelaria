@@ -6,15 +6,15 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrudMenuTxt extends JFrame {
+public class Menu extends JFrame {
 
     private JTextField textFieldId, textFieldNome, textFieldEmail, textFieldTelefone;
     private JButton btnAdicionar, btnAtualizar, btnExcluir, btnBuscar, btnListar;
     private List<Hospede> registros;
 
-    public CrudMenuTxt() {
+    public Menu() {
         // Configurações da janela
-        setTitle("Menu CRUD");
+        setTitle("Menu");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -202,7 +202,7 @@ public class CrudMenuTxt extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new CrudMenuTxt().setVisible(true); 
+                new Menu().setVisible(true); 
             }
         });
     }
