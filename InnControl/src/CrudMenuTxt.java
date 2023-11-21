@@ -127,6 +127,7 @@ public class CrudMenuTxt extends JFrame {
 
         salvarRegistros();
         JOptionPane.showMessageDialog(this, "Registro adicionado com sucesso.");
+        limpartextField();
     }
 
     private void atualizarRegistro() {
@@ -145,6 +146,7 @@ public class CrudMenuTxt extends JFrame {
         }
 
         JOptionPane.showMessageDialog(this, "Registro não encontrado.");
+        limpartextField();
     }
 
     private void excluirRegistro() {
@@ -156,11 +158,13 @@ public class CrudMenuTxt extends JFrame {
                 registros.remove(registro);
                 salvarRegistros();
                 JOptionPane.showMessageDialog(this, "Registro excluído com sucesso.");
+                limpartextField();
                 return;
             }
         }
 
         JOptionPane.showMessageDialog(this, "Registro não encontrado.");
+        limpartextField();
     }
 
     private void buscarRegistro() {
@@ -185,6 +189,14 @@ public class CrudMenuTxt extends JFrame {
             result.append("ID: ").append(registro.getId()).append(", Nome: ").append(registro.getNome()).append(", Telefone: ").append(registro.getTelefone()).append(", Email: ").append(registro.getEmail()).append("\n"); 
         }
         JOptionPane.showMessageDialog(this, result.toString()); 
+    }
+
+    private void limpartextField()
+    {
+        textFieldId.setText("");
+        textFieldNome.setText("");
+        textFieldTelefone.setText("");
+        textFieldEmail.setText("");
     }
 
     public static void main(String[] args) {
