@@ -14,36 +14,27 @@ public class Main
     {
         List<Hospede> list = new ArrayList<>();
 
-        Hospede hospede1 = new Hospede("Joao", "123456789");
-        hospede1.realizarReserva();
-        list.add(hospede1);
-        Hospede hospede2 = new Hospede("Maria", "987654321");
-        hospede2.realizarReserva();
-        list.add(hospede2);
         addHospede(list, "Yuri", "6438746");
 
         System.out.println(list.get(0));
 
-        removeHospede(list, 18);
+        // removeHospede();
 
         System.out.println(list.get(0));
 
         /*Conta conta1 = new Conta(1, "Joao", hospede1);
         Conta conta2 = new Conta(2, "Maria", hospede2);
-        
+
         Arrumadeira arrumadeira = new Arrumadeira();
         conta1.setValor(arrumadeira.registrarConsumo());
         arrumadeira.fecharScanner();
-        
+
         hospede2.pagarConta(conta2, hospede2);*/
     }
 
     public static void addHospede(List<Hospede> list, String nome, String telefone)
     {
         list.add(new Hospede(nome, telefone));
-        Hospede hospede = new Hospede(nome, telefone);
-        hospede.realizarReserva();
-        list.add(hospede);
     }
 
     public static void removeHospede(List<Hospede> list, int id)
