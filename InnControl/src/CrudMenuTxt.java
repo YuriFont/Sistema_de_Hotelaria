@@ -30,6 +30,7 @@ public class CrudMenuTxt extends JFrame {
         // Cria os componentes
         textFieldId = new JTextField(10);
         textFieldNome = new JTextField(20);
+        textFieldTelefone = new JTextField(20);
         textFieldEmail = new JTextField(20);
 
         btnAdicionar = new JButton("Adicionar");
