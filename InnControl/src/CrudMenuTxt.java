@@ -15,7 +15,7 @@ public class CrudMenuTxt extends JFrame {
     public CrudMenuTxt() {
         // Configurações da janela
         setTitle("Menu CRUD");
-        setSize(400, 300);
+        setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -89,7 +89,7 @@ public class CrudMenuTxt extends JFrame {
 
     private List<Hospede> carregarRegistros() {
         List<Hospede> registros = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("registros.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("InnControl/registros/registros.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
@@ -106,7 +106,7 @@ public class CrudMenuTxt extends JFrame {
     }
 
     private void salvarRegistros() {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("registros.txt"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("InnControl/registros/registros.txt"))) {
             for (Hospede registro : registros) {
                 bw.write(registro.getId() + ", " + registro.getNome() + ", " + registro.getTelefone() + ", " + registro.getEmail());
                 bw.newLine(); 
