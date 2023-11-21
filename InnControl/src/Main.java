@@ -14,13 +14,20 @@ public class Main
     {
         List<Hospede> list = new ArrayList<>();
 
+        Hospede hospede1 = new Hospede("Joao", "123456789");
+        hospede1.realizarReserva();
+        list.add(hospede1);
+        Hospede hospede2 = new Hospede("Maria", "987654321");
+        hospede2.realizarReserva();
+        list.add(hospede2);
+
         /*Conta conta1 = new Conta(1, "Joao", hospede1);
         Conta conta2 = new Conta(2, "Maria", hospede2);
-
+        
         Arrumadeira arrumadeira = new Arrumadeira();
         conta1.setValor(arrumadeira.registrarConsumo());
         arrumadeira.fecharScanner();
-
+        
         hospede2.pagarConta(conta2, hospede2);*/
     }
 }

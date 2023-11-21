@@ -1,3 +1,6 @@
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Hospede 
 {
@@ -5,15 +8,20 @@ public class Hospede
     private int id;
     private String telefone;
 
+    private List<Integer> ids;
+
     public Hospede()
     {
 
     }
 
-    public Hospede(String nome, int id, String telefone) 
+    public Hospede(String nome, String telefone) 
     {
+        if (this.ids == null) {
+        this.ids = new ArrayList<>();
+        }
+        sorteiaNumero();
         this.nome = nome;
-        this.id = id;
         this.telefone = telefone;
     }
 
@@ -56,5 +64,18 @@ public class Hospede
     {
         Recepcionista recepcionista = new Recepcionista();
         recepcionista.fazerCheckOut(conta, hospede);
+    }
+
+    public void sorteiaNumero() 
+    {
+        if (this.ids.contains(this.id)) {
+            System.out.println("ID já existe!");
+            return;
+        }
+
+        Random random = new Random();
+        int numero = random.nextInt(1000);
+        this.ids.add(numero);
+        this.id = numero;
     }
 }
