@@ -2,16 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TelaAdicionarValor extends JFrame {
-    private Map<Integer, Double> contasHospedes;
+public class SistemaGarcom extends JFrame {
+    private List<Conta> contas;
     private JTextField idTextField;  // Adicione estas linhas
     private JTextField valorTextField;  // Adicione estas linhas
 
-    public TelaAdicionarValor() {
-        contasHospedes = new HashMap<>();
+    public SistemaGarcom() {
 
         // Configurações do JFrame
         setTitle("Adicionar Valor à Conta");
@@ -50,6 +54,38 @@ public class TelaAdicionarValor extends JFrame {
 
         // Exibindo a janela
         setVisible(true);
+        contas = carregarConta();
+    }
+
+    private List<Conta> carregarConta() 
+    {
+        List<Conta>  contas = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader("InnControl/registros/contas.txt"))) 
+        {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                int id = Integer.parseInt(parts[0].trim());
+                double valor = Double.parseDouble(parts[1].trim());
+                contas.add(new Conta(id, valor));
+            }
+        } catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+        return contas;
+    }
+
+    private void salvarConta() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("InnControl/registros/contas.txt"))) {
+            for (Conta conta : contas) {
+                writer.write(conta.getId() + ", " + conta.getValor());
+                writer.newLine(); 
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao salvar no arquivo.");
+        }
     }
 
     private void adicionarValorConta() {
@@ -58,25 +94,17 @@ public class TelaAdicionarValor extends JFrame {
             double valor = Double.parseDouble(valorTextField.getText());
 
             // Verificando se o ID do hóspede existe
-            if (contasHospedes.containsKey(idHospede)) {
-                // Adicionando o valor à conta do hóspede
-                double valorAtual = contasHospedes.get(idHospede);
-                contasHospedes.put(idHospede, valorAtual + valor);
-                JOptionPane.showMessageDialog(this, "Valor adicionado com sucesso!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Hóspede não encontrado.");
+            for(Conta conta : contas)
+            {
+                if (conta.getId() == idHospede)
+                {
+                    conta.setValor((conta.getValor() + valor));
+                    JOptionPane.showMessageDialog(this, "Valor adicionado com sucesso!");
+                }
             }
+            salvarConta();
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Digite valores válidos nos campos.");
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new TelaAdicionarValor();
-            }
-        });
     }
 }

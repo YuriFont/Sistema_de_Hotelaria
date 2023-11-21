@@ -1,9 +1,7 @@
 public class Conta
 {
-    private int numeroDaConta;
-    private String nomeDoHospede;
+    private int id;
     private double valor;
-    private Hospede hospede;
 
 
     public Conta()
@@ -11,19 +9,10 @@ public class Conta
 
     }
 
-    public Conta(int numeroDaConta, String nomeDoHospede, Hospede hospede)
+    public Conta(int id, double valor)
     {
-        this.numeroDaConta = numeroDaConta;
-        this.nomeDoHospede = nomeDoHospede;
-        this.hospede = hospede;
-    }
-
-    public Hospede getHospede() {
-        return hospede;
-    }
-
-    public void setHospede(Hospede hospede) {
-        this.hospede = hospede;
+        this.id = id;
+        this.valor = valor;
     }
 
     public double getValor() 
@@ -36,23 +25,13 @@ public class Conta
         this.valor = valor;
     }
 
-    public int getNumeroDaConta()
+    public int getId()
     {
-        return numeroDaConta;
+        return id;
     }
 
-    public void setNumeroDaConta(int numeroDaConta)
+    public void setId(int id)
     {
-        this.numeroDaConta = numeroDaConta;
-    }
-
-    public String getNomeDoHospede()
-    {
-        return nomeDoHospede;
-    }
-
-    public void setNomeDoHospede(String nomeDoHospede)
-    {
-        this.nomeDoHospede = nomeDoHospede;
+        this.id = id;
     }    
 }

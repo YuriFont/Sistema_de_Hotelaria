@@ -1,4 +1,4 @@
-public class Funcionario 
+public class Funcionario
 {
     private String nome;
     private int id;
@@ -33,7 +33,4 @@ public class Funcionario
     {
         this.telefone = telefone;
     }
-
-
-
 }

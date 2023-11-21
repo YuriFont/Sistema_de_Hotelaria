@@ -6,13 +6,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Menu extends JFrame {
+public class SistemaRecepcionista extends JFrame {
 
     private JTextField textFieldId, textFieldNome, textFieldEmail, textFieldTelefone;
     private JButton btnAdicionar, btnAtualizar, btnExcluir, btnBuscar, btnListar;
     private List<Hospede> registros;
+    private List<Conta> contas;
 
-    public Menu() {
+    public SistemaRecepcionista() {
         // Configurações da janela
         setTitle("Menu");
         setSize(1000, 600);
@@ -23,7 +24,8 @@ public class Menu extends JFrame {
         initUI();
 
         // Carrega os registros do arquivo
-        registros = carregarRegistros();   
+        registros = carregarRegistros();
+        contas = carregarConta();
     }
 
     private void initUI() {
@@ -113,6 +115,25 @@ public class Menu extends JFrame {
         return registros;
     }
 
+    private List<Conta> carregarConta() 
+    {
+        List<Conta>  contas = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader("InnControl/registros/contas.txt"))) 
+        {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                int id = Integer.parseInt(parts[0].trim());
+                double valor = Double.parseDouble(parts[1].trim());
+                contas.add(new Conta(id, valor));
+            }
+        } catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+        return contas;
+    }
+
     private void salvarRegistros() 
     {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("InnControl/registros/registros.txt"))) {
@@ -122,6 +143,28 @@ public class Menu extends JFrame {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void salvarConta() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("InnControl/registros/contas.txt"))) {
+            for (Conta conta : contas) {
+                writer.write(conta.getId() + ", " + conta.getValor());
+                writer.newLine(); 
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao salvar no arquivo.");
+        }
+    }
+
+    private void criarConta(int id, double valor)
+    {
+        try (FileWriter writer = new FileWriter("InnControl/registros/contas.txt", true)) {
+            writer.write(id + ", " + valor + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao salvar no arquivo.");
         }
     }
 
@@ -136,6 +179,7 @@ public class Menu extends JFrame {
         registros.add(novoRegistro);
 
         salvarRegistros();
+        criarConta(id, 0);
         JOptionPane.showMessageDialog(this, "Registro adicionado com sucesso.");
         limpartextField();
     }
@@ -170,8 +214,11 @@ public class Menu extends JFrame {
         for (Hospede registro : registros) 
         {
             if (registro.getId() == id) {
+                
                 registros.remove(registro);
+                removeConta(id);
                 salvarRegistros();
+                salvarConta();
                 JOptionPane.showMessageDialog(this, "Registro excluído com sucesso.");
                 limpartextField();
                 return;
@@ -180,6 +227,19 @@ public class Menu extends JFrame {
 
         JOptionPane.showMessageDialog(this, "Registro não encontrado.");
         limpartextField();
+    }
+
+    private void removeConta(int id)
+    {
+        for (Conta conta : contas)
+        {
+            if (conta.getId() == id)
+            {
+                contas.remove(conta);
+                return;
+            }
+
+        }
     }
 
     private void buscarRegistro() 

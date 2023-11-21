@@ -6,7 +6,7 @@ public class Recepcionista extends Funcionario
     {
         SwingUtilities.invokeLater(new Runnable() {   
             public void run() {    
-                new Menu().setVisible(true); 
+                new SistemaRecepcionista().setVisible(true); 
             }
         });
     }
@@ -16,13 +16,8 @@ public class Recepcionista extends Funcionario
         SwingUtilities.invokeLater(new Runnable() 
             {   
                 public void run() {    
-                    new Menu().setVisible(true); 
+                    new SistemaRecepcionista().setVisible(true); 
             }
         });
-    }
-
-    public double consultarConsumo()
-    {
-        return 0;
     }
 }
