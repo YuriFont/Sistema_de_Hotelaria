@@ -57,10 +57,12 @@ public class Hospede
         this.email = email;
     }
 
+    
+
     public void pagarConta(Conta conta, Hospede hospede)
     {
         Recepcionista recepcionista = new Recepcionista();
-        recepcionista.fazerCheckOut(conta, hospede);
+        recepcionista.fazerCheckOut();
     }
 
 }
