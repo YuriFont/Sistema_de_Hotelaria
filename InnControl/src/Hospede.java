@@ -1,29 +1,21 @@
-import java.util.Random;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Hospede 
 {
     private String nome;
     private int id;
     private String telefone;
-
-    private List<Integer> ids;
+    private String email;
 
     public Hospede()
     {
 
     }
 
-    public Hospede(String nome, String telefone) 
+    public Hospede(int id, String nome, String telefone, String email) 
     {
-        if (this.ids == null) {
-        this.ids = new ArrayList<>();
-        }
-        sorteiaNumero();
+        this.id = id;
         this.nome = nome;
         this.telefone = telefone;
-        this.realizarReserva();
+        this.email = email;
     }
 
     public String getNome() 
@@ -55,10 +47,14 @@ public class Hospede
         this.telefone = telefone;
     }
 
-    public void realizarReserva() 
+    public String getEmail() 
     {
-        Recepcionista recepcionista = new Recepcionista();
-        recepcionista.fazerCheckIn(this.nome, this.id, this.telefone);
+        return email;
+    }
+
+    public void setEmail(String email) 
+    {
+        this.email = email;
     }
 
     public void pagarConta(Conta conta, Hospede hospede)
@@ -67,22 +63,4 @@ public class Hospede
         recepcionista.fazerCheckOut(conta, hospede);
     }
 
-    public void sorteiaNumero() 
-    {
-        if (this.ids.contains(this.id)) {
-            System.out.println("ID já existe!");
-            return;
-        }
-
-        Random random = new Random();
-        int numero = random.nextInt(1000);
-        this.ids.add(numero);
-        this.id = numero;
-
-    }
-    
-    public String toString()
-    {
-        return ("Id: " + id + '\n' + "Name: " + nome + '\n' + "Telefone: " + telefone);
-    }
 }

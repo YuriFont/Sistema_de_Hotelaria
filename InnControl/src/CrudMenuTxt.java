@@ -8,9 +8,9 @@ import java.util.List;
 
 public class CrudMenuTxt extends JFrame {
 
-    private JTextField textFieldId, textFieldNome, textFieldEmail;
+    private JTextField textFieldId, textFieldNome, textFieldEmail, textFieldTelefone;
     private JButton btnAdicionar, btnAtualizar, btnExcluir, btnBuscar, btnListar;
-    private List<Registro> registros;
+    private List<Hospede> registros;
 
     public CrudMenuTxt() {
         // Configurações da janela
@@ -75,6 +75,8 @@ public class CrudMenuTxt extends JFrame {
         add(textFieldId);
         add(new JLabel("Nome:"));
         add(textFieldNome);
+        add(new JLabel("Telefone:"));
+        add(textFieldTelefone);
         add(new JLabel("Email:"));
         add(textFieldEmail);
         add(btnAdicionar);
@@ -84,16 +86,17 @@ public class CrudMenuTxt extends JFrame {
         add(btnListar);
     }
 
-    private List<Registro> carregarRegistros() {
-        List<Registro> registros = new ArrayList<>();
+    private List<Hospede> carregarRegistros() {
+        List<Hospede> registros = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader("registros.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
                 int id = Integer.parseInt(parts[0].trim());
                 String nome = parts[1].trim();
-                String email = parts[2].trim();
-                registros.add(new Registro(id, nome, email));
+                String telefone = parts[2].trim();
+                String email = parts[3].trim();
+                registros.add(new Hospede(id, nome, telefone, email));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -103,9 +106,9 @@ public class CrudMenuTxt extends JFrame {
 
     private void salvarRegistros() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("registros.txt"))) {
-            for (Registro registro : registros) {
-                bw.write(registro.getId() + ", " + registro.getNome() + ", " + registro.getEmail());
-                bw.newLine();
+            for (Hospede registro : registros) {
+                bw.write(registro.getId() + ", " + registro.getNome() + ", " + registro.getTelefone() + ", " + registro.getEmail());
+                bw.newLine(); 
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -114,10 +117,11 @@ public class CrudMenuTxt extends JFrame {
 
     private void adicionarRegistro() {
         String nome = textFieldNome.getText();
+        String telefone = textFieldTelefone.getText();
         String email = textFieldEmail.getText();
 
-        int id = registros.isEmpty() ? 1 : registros.get(registros.size() - 1).getId() + 1;
-        Registro novoRegistro = new Registro(id, nome, email);
+        int id = registros.isEmpty() ? 1 : registros.get(registros.size() - 1).getId() + 1; 
+        Hospede novoRegistro = new Hospede(id, nome, telefone, email);
         registros.add(novoRegistro);
 
         salvarRegistros();
@@ -128,9 +132,10 @@ public class CrudMenuTxt extends JFrame {
         String idStr = textFieldId.getText();
         int id = Integer.parseInt(idStr);
 
-        for (Registro registro : registros) {
+        for (Hospede registro : registros) {
             if (registro.getId() == id) {
                 registro.setNome(textFieldNome.getText());
+                registro.setTelefone(textFieldTelefone.getText());
                 registro.setEmail(textFieldEmail.getText());
                 salvarRegistros();
                 JOptionPane.showMessageDialog(this, "Registro atualizado com sucesso.");
@@ -145,7 +150,7 @@ public class CrudMenuTxt extends JFrame {
         String idStr = textFieldId.getText();
         int id = Integer.parseInt(idStr);
 
-        for (Registro registro : registros) {
+        for (Hospede registro : registros) {
             if (registro.getId() == id) {
                 registros.remove(registro);
                 salvarRegistros();
@@ -161,9 +166,10 @@ public class CrudMenuTxt extends JFrame {
         String idStr = textFieldId.getText();
         int id = Integer.parseInt(idStr);
 
-        for (Registro registro : registros) {
+        for (Hospede registro : registros) {
             if (registro.getId() == id) {
                 textFieldNome.setText(registro.getNome());
+                textFieldTelefone.setText(registro.getTelefone());
                 textFieldEmail.setText(registro.getEmail());
                 return;
             }
@@ -173,51 +179,21 @@ public class CrudMenuTxt extends JFrame {
     }
 
     private void listarRegistros() {
-        StringBuilder result = new StringBuilder("Lista de Registros:\n");
-        for (Registro registro : registros) {
-            result.append("ID: ").append(registro.getId()).append(", Nome: ").append(registro.getNome()).append(", Email: ").append(registro.getEmail()).append("\n");
+        StringBuilder result = new StringBuilder("Lista de Registros:\n"); 
+        for (Hospede registro : registros) {
+            result.append("ID: ").append(registro.getId()).append(", Nome: ").append(registro.getNome()).append(", Telefone: ").append(registro.getTelefone()).append(", Email: ").append(registro.getEmail()).append("\n"); 
         }
-        JOptionPane.showMessageDialog(this, result.toString());
+        JOptionPane.showMessageDialog(this, result.toString()); 
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new CrudMenuTxt().setVisible(true);
+                new CrudMenuTxt().setVisible(true); 
             }
         });
     }
 }
 
-class Registro {
-    private int id;
-    private String nome;
-    private String email;
 
-    public Registro(int id, String nome, String email) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-}
 
