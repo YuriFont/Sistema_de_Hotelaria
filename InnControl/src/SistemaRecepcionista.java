@@ -6,13 +6,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Menu extends JFrame {
+public class SistemaRecepcionista extends JFrame {
 
     private JTextField textFieldId, textFieldNome, textFieldEmail, textFieldTelefone;
     private JButton btnAdicionar, btnAtualizar, btnExcluir, btnBuscar, btnListar;
     private List<Hospede> registros;
 
-    public Menu() {
+    public SistemaRecepcionista() {
         // Configurações da janela
         setTitle("Menu");
         setSize(1000, 600);
