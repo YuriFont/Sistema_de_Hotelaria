@@ -20,6 +20,13 @@ public class Main
         Hospede hospede2 = new Hospede("Maria", "987654321");
         hospede2.realizarReserva();
         list.add(hospede2);
+        addHospede(list, "Yuri", "6438746");
+
+        System.out.println(list.get(0));
+
+        removeHospede(list, 18);
+
+        System.out.println(list.get(0));
 
         /*Conta conta1 = new Conta(1, "Joao", hospede1);
         Conta conta2 = new Conta(2, "Maria", hospede2);
@@ -31,9 +38,21 @@ public class Main
         hospede2.pagarConta(conta2, hospede2);*/
     }
 
-    public void addHospede(List<Hospede> list, String nome, int id, String telefone)
+    public static void addHospede(List<Hospede> list, String nome, String telefone)
     {
         list.add(new Hospede(nome, telefone));
+        Hospede hospede = new Hospede(nome, telefone);
+        hospede.realizarReserva();
+        list.add(hospede);
+    }
+
+    public static void removeHospede(List<Hospede> list, int id)
+    {
+        for(Hospede x : list)
+        {
+            if (x.getId() == id)
+                list.remove(x);
+        }
     }
 
 }

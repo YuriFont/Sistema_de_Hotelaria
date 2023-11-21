@@ -23,6 +23,7 @@ public class Hospede
         sorteiaNumero();
         this.nome = nome;
         this.telefone = telefone;
+        this.realizarReserva();
     }
 
     public String getNome() 
@@ -77,5 +78,11 @@ public class Hospede
         int numero = random.nextInt(1000);
         this.ids.add(numero);
         this.id = numero;
+
+    }
+    
+    public String toString()
+    {
+        return ("Id: " + id + '\n' + "Name: " + nome + '\n' + "Telefone: " + telefone);
     }
 }
