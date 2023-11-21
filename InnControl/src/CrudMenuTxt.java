@@ -15,7 +15,7 @@ public class CrudMenuTxt extends JFrame {
     public CrudMenuTxt() {
         // Configurações da janela
         setTitle("Menu CRUD");
-        setSize(400, 300);
+        setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
