@@ -62,7 +62,7 @@ public class Hospede
     public void pagarConta(Conta conta, Hospede hospede)
     {
         Recepcionista recepcionista = new Recepcionista();
-        recepcionista.fazerCheckOut();
+        recepcionista.fazerCheckIn();
     }
 
 }
