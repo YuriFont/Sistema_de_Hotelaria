@@ -14,7 +14,13 @@ public class Main
     {
         List<Hospede> list = new ArrayList<>();
 
+        addHospede(list, "Yuri", 18, "6438746");
 
+        System.out.println(list.get(0));
+
+        removeHospede(list, 18);
+
+        System.out.println(list.get(0));
 
         /*Conta conta1 = new Conta(1, "Joao", hospede1);
         Conta conta2 = new Conta(2, "Maria", hospede2);
@@ -26,9 +32,20 @@ public class Main
         hospede2.pagarConta(conta2, hospede2);*/
     }
 
-    public void addHospede(List<Hospede> list, String nome, int id, String telefone)
+    public static void addHospede(List<Hospede> list, String nome, String telefone)
     {
-        list.add(new Hospede(nome, id, telefone));
+        Hospede hospede = new Hospede(nome, telefone);
+        hospede.realizarReserva();
+        list.add(hospede);
+    }
+
+    public static void removeHospede(List<Hospede> list, int id)
+    {
+        for(Hospede x : list)
+        {
+            if (x.getId() == id)
+                list.remove(x);
+        }
     }
 
 }

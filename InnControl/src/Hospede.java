@@ -15,6 +15,7 @@ public class Hospede
         this.nome = nome;
         this.id = id;
         this.telefone = telefone;
+        this.realizarReserva();
     }
 
     public String getNome() 
@@ -56,5 +57,10 @@ public class Hospede
     {
         Recepcionista recepcionista = new Recepcionista();
         recepcionista.fazerCheckOut(conta, hospede);
+    }
+
+    public String toString()
+    {
+        return ("Id: " + id + '\n' + "Name: " + nome + '\n' + "Telefone: " + telefone);
     }
 }
