@@ -15,15 +15,15 @@ public class Menu extends JFrame {
     public Menu() {
         // Configurações da janela
         setTitle("Menu");
-        setSize(900, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1000, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setLocationRelativeTo(null);
 
         // Inicializa os componentes
         initUI();
 
         // Carrega os registros do arquivo
-        registros = carregarRegistros();
+        registros = carregarRegistros();   
     }
 
     private void initUI() {
@@ -40,38 +40,43 @@ public class Menu extends JFrame {
         btnListar = new JButton("Listar");
 
         // Adiciona os ouvintes de eventos
-        btnAdicionar.addActionListener(new ActionListener() {
+        btnAdicionar.addActionListener(new ActionListener() 
+        {
             public void actionPerformed(ActionEvent e) {
                 adicionarRegistro();
             }
         });
 
-        btnAtualizar.addActionListener(new ActionListener() {
+        btnAtualizar.addActionListener(new ActionListener() 
+        {
             public void actionPerformed(ActionEvent e) {
                 atualizarRegistro();
             }
         });
 
-        btnExcluir.addActionListener(new ActionListener() {
+        btnExcluir.addActionListener(new ActionListener() 
+        {
             public void actionPerformed(ActionEvent e) {
                 excluirRegistro();
             }
         });
 
-        btnBuscar.addActionListener(new ActionListener() {
+        btnBuscar.addActionListener(new ActionListener() 
+        {
             public void actionPerformed(ActionEvent e) {
                 buscarRegistro();
             }
         });
 
-        btnListar.addActionListener(new ActionListener() {
+        btnListar.addActionListener(new ActionListener() 
+        {
             public void actionPerformed(ActionEvent e) {
                 listarRegistros();
             }
         });
 
         // Layout
-        setLayout(new GridLayout(6, 2));
+        setLayout(new GridLayout(10, 4));
         add(new JLabel("ID:"));
         add(textFieldId);
         add(new JLabel("Nome:"));
@@ -87,9 +92,11 @@ public class Menu extends JFrame {
         add(btnListar);
     }
 
-    private List<Hospede> carregarRegistros() {
+    private List<Hospede> carregarRegistros() 
+    {
         List<Hospede> registros = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("InnControl/registros/registros.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("InnControl/registros/registros.txt"))) 
+        {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
@@ -99,13 +106,15 @@ public class Menu extends JFrame {
                 String email = parts[3].trim();
                 registros.add(new Hospede(id, nome, telefone, email));
             }
-        } catch (IOException e) {
+        } catch (IOException e) 
+        {
             e.printStackTrace();
         }
         return registros;
     }
 
-    private void salvarRegistros() {
+    private void salvarRegistros() 
+    {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("InnControl/registros/registros.txt"))) {
             for (Hospede registro : registros) {
                 bw.write(registro.getId() + ", " + registro.getNome() + ", " + registro.getTelefone() + ", " + registro.getEmail());
@@ -116,7 +125,8 @@ public class Menu extends JFrame {
         }
     }
 
-    private void adicionarRegistro() {
+    private void adicionarRegistro() 
+    {
         String nome = textFieldNome.getText();
         String telefone = textFieldTelefone.getText();
         String email = textFieldEmail.getText();
@@ -130,12 +140,15 @@ public class Menu extends JFrame {
         limpartextField();
     }
 
-    private void atualizarRegistro() {
+    private void atualizarRegistro() 
+    {
         String idStr = textFieldId.getText();
         int id = Integer.parseInt(idStr);
 
-        for (Hospede registro : registros) {
-            if (registro.getId() == id) {
+        for (Hospede registro : registros) 
+        {
+            if (registro.getId() == id) 
+            {
                 registro.setNome(textFieldNome.getText());
                 registro.setTelefone(textFieldTelefone.getText());
                 registro.setEmail(textFieldEmail.getText());
@@ -149,11 +162,13 @@ public class Menu extends JFrame {
         limpartextField();
     }
 
-    private void excluirRegistro() {
+    private void excluirRegistro() 
+    {
         String idStr = textFieldId.getText();
         int id = Integer.parseInt(idStr);
 
-        for (Hospede registro : registros) {
+        for (Hospede registro : registros) 
+        {
             if (registro.getId() == id) {
                 registros.remove(registro);
                 salvarRegistros();
@@ -167,11 +182,13 @@ public class Menu extends JFrame {
         limpartextField();
     }
 
-    private void buscarRegistro() {
+    private void buscarRegistro() 
+    {
         String idStr = textFieldId.getText();
         int id = Integer.parseInt(idStr);
 
-        for (Hospede registro : registros) {
+        for (Hospede registro : registros) 
+        {
             if (registro.getId() == id) {
                 textFieldNome.setText(registro.getNome());
                 textFieldTelefone.setText(registro.getTelefone());
@@ -183,7 +200,8 @@ public class Menu extends JFrame {
         JOptionPane.showMessageDialog(this, "Registro não encontrado.");
     }
 
-    private void listarRegistros() {
+    private void listarRegistros() 
+    {
         StringBuilder result = new StringBuilder("Lista de Registros:\n"); 
         for (Hospede registro : registros) {
             result.append("ID: ").append(registro.getId()).append(", Nome: ").append(registro.getNome()).append(", Telefone: ").append(registro.getTelefone()).append(", Email: ").append(registro.getEmail()).append("\n"); 
@@ -199,13 +217,6 @@ public class Menu extends JFrame {
         textFieldEmail.setText("");
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new Menu().setVisible(true); 
-            }
-        });
-    }
 }
 
 
