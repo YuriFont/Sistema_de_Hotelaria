@@ -160,6 +160,7 @@ public class SistemaRecepcionista extends JFrame {
                 registro.setEmail(textFieldEmail.getText());
                 salvarRegistros();
                 JOptionPane.showMessageDialog(this, "Registro atualizado com sucesso.");
+                limpartextField();
                 return;
             }
         }
