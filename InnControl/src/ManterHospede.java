@@ -12,23 +12,18 @@ public class ManterHospede extends JFrame {
     private JButton btnAdicionar, btnAtualizar, btnExcluir, btnBuscar, btnListar;
     private List<Hospede> registros;
 
-    public ManterHospede() {
-        // Configurações da janela
+    public ManterHospede()
+    {
         setTitle("Menu");
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setLocationRelativeTo(null);
-
-        // Inicializa os componentes
         initUI();
-
-        // Carrega os registros do arquivo
         registros = carregarRegistros();   
     }
 
     private void initUI()
     {
-        // Cria os componentes
         textFieldId = new JTextField(10);
         textFieldNome = new JTextField(20);
         textFieldTelefone = new JTextField(20);
@@ -40,7 +35,6 @@ public class ManterHospede extends JFrame {
         btnBuscar = new JButton("Buscar");
         btnListar = new JButton("Listar");
 
-        // Adiciona os ouvintes de eventos
         btnAdicionar.addActionListener(new ActionListener() 
         {
             public void actionPerformed(ActionEvent e) {
@@ -76,7 +70,6 @@ public class ManterHospede extends JFrame {
             }
         });
 
-        // Layout
         setLayout(new GridLayout(10, 4));
         add(new JLabel("ID:"));
         add(textFieldId);
