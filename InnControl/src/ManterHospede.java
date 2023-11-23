@@ -6,13 +6,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SistemaRecepcionista extends JFrame {
+public class ManterHospede extends JFrame {
 
     private JTextField textFieldId, textFieldNome, textFieldEmail, textFieldTelefone;
     private JButton btnAdicionar, btnAtualizar, btnExcluir, btnBuscar, btnListar;
     private List<Hospede> registros;
 
-    public SistemaRecepcionista() {
+    public ManterHospede() {
         // Configurações da janela
         setTitle("Menu");
         setSize(1000, 600);

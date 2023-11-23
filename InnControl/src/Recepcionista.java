@@ -8,7 +8,7 @@ public class Recepcionista extends Funcionario
         {   
             public void run()
             {    
-                new SistemaRecepcionista().setVisible(true); 
+                new ManterHospede().setVisible(true); 
             }
         });
     }
@@ -19,7 +19,7 @@ public class Recepcionista extends Funcionario
         {   
             public void run()
             {    
-                new SistemaRecepcionista().setVisible(true); 
+                new ManterHospede().setVisible(true); 
             }
         });
     }
