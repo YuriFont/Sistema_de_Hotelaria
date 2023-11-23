@@ -12,4 +12,5 @@ public class Main
         Recepcionista recepcionista = new Recepcionista();
         recepcionista.fazerCheckIn();
     }
+
 }

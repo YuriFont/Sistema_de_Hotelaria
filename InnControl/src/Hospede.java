@@ -28,7 +28,8 @@ public class Hospede
         this.nome = nome;
     }
 
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 

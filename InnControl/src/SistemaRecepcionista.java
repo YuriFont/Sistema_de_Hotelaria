@@ -26,7 +26,8 @@ public class SistemaRecepcionista extends JFrame {
         registros = carregarRegistros();   
     }
 
-    private void initUI() {
+    private void initUI()
+    {
         // Cria os componentes
         textFieldId = new JTextField(10);
         textFieldNome = new JTextField(20);
@@ -98,7 +99,8 @@ public class SistemaRecepcionista extends JFrame {
         try (BufferedReader br = new BufferedReader(new FileReader("InnControl/registros/registros.txt"))) 
         {
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null)
+            {
                 String[] parts = line.split(",");
                 int id = Integer.parseInt(parts[0].trim());
                 String nome = parts[1].trim();
@@ -106,7 +108,8 @@ public class SistemaRecepcionista extends JFrame {
                 String email = parts[3].trim();
                 registros.add(new Hospede(id, nome, telefone, email));
             }
-        } catch (IOException e) 
+        }
+        catch (IOException e) 
         {
             e.printStackTrace();
         }
@@ -115,12 +118,15 @@ public class SistemaRecepcionista extends JFrame {
 
     private void salvarRegistros() 
     {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("InnControl/registros/registros.txt"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("InnControl/registros/registros.txt")))
+        {
             for (Hospede registro : registros) {
                 bw.write(registro.getId() + ", " + registro.getNome() + ", " + registro.getTelefone() + ", " + registro.getEmail());
                 bw.newLine(); 
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
@@ -169,7 +175,8 @@ public class SistemaRecepcionista extends JFrame {
 
         for (Hospede registro : registros) 
         {
-            if (registro.getId() == id) {
+            if (registro.getId() == id)
+            {
                 registros.remove(registro);
                 salvarRegistros();
                 JOptionPane.showMessageDialog(this, "Registro excluído com sucesso.");
@@ -189,7 +196,8 @@ public class SistemaRecepcionista extends JFrame {
 
         for (Hospede registro : registros) 
         {
-            if (registro.getId() == id) {
+            if (registro.getId() == id)
+            {
                 textFieldNome.setText(registro.getNome());
                 textFieldTelefone.setText(registro.getTelefone());
                 textFieldEmail.setText(registro.getEmail());
@@ -203,7 +211,8 @@ public class SistemaRecepcionista extends JFrame {
     private void listarRegistros() 
     {
         StringBuilder result = new StringBuilder("Lista de Registros:\n"); 
-        for (Hospede registro : registros) {
+        for (Hospede registro : registros)
+        {
             result.append("ID: ").append(registro.getId()).append(", Nome: ").append(registro.getNome()).append(", Telefone: ").append(registro.getTelefone()).append(", Email: ").append(registro.getEmail()).append("\n"); 
         }
         JOptionPane.showMessageDialog(this, result.toString()); 
@@ -218,6 +227,3 @@ public class SistemaRecepcionista extends JFrame {
     }
 
 }
-
-
-

@@ -34,6 +34,4 @@ public class Funcionario
         this.telefone = telefone;
     }
 
-
-
 }
